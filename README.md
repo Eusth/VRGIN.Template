@@ -1,8 +1,6 @@
 # VRGIN.Template
 Generic template project that illustrates how to use [VRGIN](https://github.com/Eusth/VRGIN).
 
-
-# Getting Started
 ## Building
 
 1. Checkout the project (recursively, because VRGIN is included as a submodule)
