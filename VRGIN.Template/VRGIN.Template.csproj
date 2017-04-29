@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="Deploy.props" Condition="Exists('Deploy.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -44,6 +45,10 @@
       <HintPath>..\VRGIN\Libs\Unity 5.3.4\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\VRGIN\Libs\Unity 5.3.4\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableContext.cs" />
@@ -58,6 +63,9 @@
       <Name>VRGIN</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Deploy.props" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <Message Text="Packaging build..." Importance="normal" />
@@ -67,29 +75,26 @@
       <DataFiles Include="$(OutputPath)Data\**\*" />
       <PdbFiles Include="$(OutputPath)*.pdb" />
     </ItemGroup>
-    
     <!-- Copy plugins to the right place -->
     <Move SourceFiles="@(ManagedLibs)" DestinationFolder="$(OutputPath)Plugins" />
-    
     <!-- Copy IPA -->
     <Copy SourceFiles="@(IPA)" DestinationFolder="$(OutputPath)%(RecursiveDir)" />
-
     <!-- Move Data stuff into IPA folder -->
     <Move SourceFiles="@(DataFiles)" DestinationFolder="$(OutputPath)IPA\Data\%(RecursiveDir)" />
-
     <!-- Remove unneeded directory -->
     <RemoveDir Directories="$(OutputPath)Data" />
-
     <!-- Remove PDB files -->
     <Delete Files="@(PdbFiles)" />
+    <CallTarget Targets="Deploy" />
   </Target>
-
-  <Target Name="Clean">
+  <Target Name="Deploy" Condition="$(GameDirectory) != '' And Exists('$(GameDirectory)')">
     <ItemGroup>
-      <_FilesToDelete Include="$(OutputPath)**\*"/>
-      <_FoldersToDelete Include="$(OutputPath)*\"/>
+      <FilesToCopy Include="$(OutputPath)**\*" />
     </ItemGroup>
-    <RemoveDir Directories="$(OutputPath)"/>
+    <Message Text="Deploying to $(GameDirectory)" Importance="high" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(GameDirectory)\%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>
-  
+  <Target Name="Clean">
+    <RemoveDir Directories="$(OutputPath)" />
+  </Target>
 </Project>
