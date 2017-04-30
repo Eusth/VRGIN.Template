@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 using VRGIN.Controls.Speech;
 using VRGIN.Core;
+using VRGIN.Helpers;
 using VRGIN.Visuals;
 
 namespace VRGIN.Template
@@ -27,7 +28,7 @@ namespace VRGIN.Template
 
             // Set defaults
             ConfineMouse = true;
-            EnforceDefaultGUIMaterials = true;
+            EnforceDefaultGUIMaterials = false;
             GUIAlternativeSortingMode = false;
             GuiLayer = "Default";
             GuiFarClipPlane = 1000f;
@@ -40,6 +41,7 @@ namespace VRGIN.Template
             UILayerMask = LayerMask.GetMask(UILayer);
             UnitToMeter = 1f;
             NearClipPlane = 0.1f;
+            PreferredGUI = GUIType.uGUI;
         }
 
         [XmlIgnore]
@@ -78,5 +80,7 @@ namespace VRGIN.Template
         public float UnitToMeter { get; set; }
 
         public float NearClipPlane { get; set; }
+
+        public GUIType PreferredGUI { get; set; }
     }
 }
