@@ -8,10 +8,12 @@ Generic template project that illustrates how to use [VRGIN](https://github.com/
     git clone --recursive https://github.com/Eusth/VRGIN.Template.git
     cd VRGIN.Template
     ```
-2. Open the solution (**\*.sln**) file
-3. Start the build in the Release configuration
+2. *(Optional)* Launch **Bootstrapper.exe** and set your project name.  This will automatically rename the project file to your liking.
+3. Open the solution (**\*.sln**) file
+4. *(Optional)* Open **Deploy.props** and set `<GameDirectory>` to the directory where your game resides. This will automatically deploy your mod when you build
+4. Start the build in the Release configuration
 
-This will generate all you need inside `bin\Release`. (This should be the same output as on the [releases page](https://github.com/Eusth/VRGIN.Template/releases))
+This will generate all you need inside `bin\Release`. (This should be the same output as on the [releases page](https://github.com/Eusth/VRGIN.Template/releases)). If you've set the game directory, your game will also have been updated.
 
 ## Installing
 
