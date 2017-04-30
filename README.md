@@ -22,4 +22,4 @@ This will generate all you need inside `bin\Release`. (This should be the same o
 
 ## Usage
 
-Start the game while SteamVR is running or use the `--vr`.
+Start the game while SteamVR is running or use the `--vr` flag.
