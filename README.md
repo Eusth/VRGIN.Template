@@ -1,7 +1,8 @@
 # VRGIN.Template
 Generic template project that illustrates how to use [VRGIN](https://github.com/Eusth/VRGIN).
 
-## Building from source
+## Using the source code
+### Building
 
 1. Checkout the project (recursively, because VRGIN is included as a submodule)
     ```sh
@@ -20,12 +21,13 @@ This will generate all you need inside `bin\Release`. (This should be the same o
 1. Patch your game by dragging its executable on **IPA.exe** (only has to be done once)
 2. By default, the game will now boot into VR mode when SteamVR is running (make sure Desktop Game Theatre is disabled)
 
-## Installing the release
+## Using the release
+### Installation
 
 1. Download release from [the release page](https://github.com/Eusth/VRGIN.Template/releases)
 2. Extract contents into a Unity folder
 3. Drag the game executable onto **IPA.exe**
 
-## Usage
+### Running
 
 Start the game while SteamVR is running or use the `--vr` flag.
