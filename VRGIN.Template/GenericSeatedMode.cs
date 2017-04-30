@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using VRGIN.Controls;
 using VRGIN.Core;
 using VRGIN.Helpers;
@@ -17,10 +18,20 @@ namespace VRGIN.Template
                 new MultiKeyboardShortcut(new KeyStroke("Ctrl+C"), new KeyStroke("Ctrl+C"), () => { VR.Manager.SetMode<GenericStandingMode>(); })
             });
         }
-
-        protected override void ChangeModeOnControllersDetected()
+        
+        /// <summary>
+        /// Disables controllers for seated mode.
+        /// </summary>
+        protected override void CreateControllers()
         {
-            VR.Manager.SetMode<GenericStandingMode>();
         }
+
+        /// <summary>
+        /// Uncomment to automatically switch into Standing Mode when controllers have been detected.
+        /// </summary>
+        //protected override void ChangeModeOnControllersDetected()
+        //{
+        //    VR.Manager.SetMode<GenericStandingMode>();
+        //}
     }
 }
